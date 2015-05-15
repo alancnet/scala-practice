@@ -18,4 +18,12 @@ object Code {
     def monkeysAndCoconuts(sailors:Int) : String = {
         throw new Exception("Not Implemented");
     }
+
+    def isTextInStream(stream: Stream[String], text: String) : Boolean = {
+        val charsMatched = stream.flatten(chunk => chunk)
+                          .foldLeft(0) (
+                                (pos, ch) => if (pos == text.length() -1) pos else if (text(pos) == ch) pos+1 else 0
+                            )
+        charsMatched == text.length() -1
+    }
 }
