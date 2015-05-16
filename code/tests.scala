@@ -20,5 +20,43 @@ object Tests {
         Assert.isTrue(Code.isTextInStream(stringToStream(phrase2, 10), "abstraction: we forget about what the symbols stand for"))
         Assert.isFalse(Code.isTextInStream(stringToStream(phrase1, 10), "abstraction: we forget about what the symbols stand for"))
         Assert.isFalse(Code.isTextInStream(stringToStream(phrase2, 10), "are chiefly these three: 1. Combining several"))
+        Assert.isTrue(Code.isTextInStream(stringToStream(phrase1, 7), "are chiefly these three: 1. Combining several"))
+        Assert.isTrue(Code.isTextInStream(stringToStream(phrase2, 15), "abstraction: we forget about what the symbols stand for"))
+        Assert.isFalse(Code.isTextInStream(stringToStream(phrase1, 20), "abstraction: we forget about what the symbols stand for"))
+        Assert.isFalse(Code.isTextInStream(stringToStream(phrase2, 30), "are chiefly these three: 1. Combining several"))
+    }
+
+    def isFibTest() = {
+        def assertNisFib (n:Int, is:Boolean) = Assert.isTrue(Code.isFibNumber(n) == is, f"Is $n a fib? $is; But you had ${!is}")
+        assertNisFib(0,true)
+        assertNisFib(1,true)
+        assertNisFib(2,true)
+        assertNisFib(3,true)
+        assertNisFib(4,false)
+        assertNisFib(5,true)
+        assertNisFib(6,false)
+        assertNisFib(7,false)
+        assertNisFib(8,true)
+        assertNisFib(9,false)
+    }
+
+    def firstNFibonacciNumbersTest() = {
+        def assertFirstNFib (n:Int, expected:Stream[Int]) = {
+            val actual = Code.firstNFibonacciNumbers(n).toList ; Assert.isTrue(actual == expected, f"The first $n fib are $expected; But you had $actual")
+        }
+        assertFirstNFib(3, Stream(0, 1, 1))
+        assertFirstNFib(6, Stream(0, 1, 1, 2, 3, 5))
+        assertFirstNFib(9, Stream(0, 1, 1, 2, 3, 5, 8, 13, 21))
+    }
+
+    def sumSomeFibTest() = {
+        def assertSumSomeFib (lower: Int, upper: Int, expected: Int) = {
+            val actual = Code.sumSomeFib(lower,upper); Assert.isTrue(actual == expected, f"The sum of all fib from $lower to $upper is $expected but you had $actual")
+        }
+        assertSumSomeFib(0,10,20)
+        assertSumSomeFib(10,20,13)
+        assertSumSomeFib(30,100,178)
+        assertSumSomeFib(100,1000,2351)
+        assertSumSomeFib(0,500,986)
     }
 }
