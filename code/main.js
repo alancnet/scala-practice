@@ -16,7 +16,7 @@ function Program() {
         var names = Object.getOwnPropertyNames(tests).sort();
         names.forEach(function(name, i) {
             if (/Test$/.test(name)) {
-                test(tests[name], name);
+                test(tests[name].bind(tests), name);
             }
         });
         console.log("Done!");
