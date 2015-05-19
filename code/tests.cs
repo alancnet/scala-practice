@@ -5,6 +5,9 @@ static class Tests {
     public static void HelloWorldTest() {
         Assert.AreEqual("Hello World!", Code.HelloWorld());
     }
+    public static void MonkeysAndCoconutsTest() {
+        Assert.AreEqual(3121, Code.MonkeysAndCoconuts(5));
+    }
     public static IEnumerable<string> Stream(string text) {
         int chunksize = 10;
         for (var i = 0; i < text.Length; i += chunksize) {

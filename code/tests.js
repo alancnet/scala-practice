@@ -4,6 +4,9 @@ var tests = {
     helloWorldTest: function() {
         assert.areEqual("Hello World!", code.helloWorld());
     },
+    monkeysAndCoconutsTest: function() {
+        assert.areEqual(3121, code.monkeysAndCoconuts(5));
+    },
     stream: function(text) {
         var head = {};
         var current = head;

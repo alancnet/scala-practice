@@ -1,8 +1,9 @@
 module Tests
 let helloWorldTest() = 
     Assert.areEqual "Hello World!" (Code.helloWorld())
-
-
+    
+let monkeysAndCoconutsTest() = 
+    Assert.areEqual 3121 (Code.monkeysAndCoconuts(5))
 
 let streamContainsTextTest() =
     let rnd = new System.Random(0)
