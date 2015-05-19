@@ -2,9 +2,7 @@ import scala.util.Random
 
 object Code {
     // Returns "Hello World!"
-    def helloWorld() : String = {
-        "Hello World!"
-    }
+    def helloWorld() : String = throw new Exception("Not Implemented")
 
     // This function should sum all of the values in the input sequence in parallel way to
     // take advantage of multiple cores
@@ -16,33 +14,28 @@ object Code {
     }
 
     // return a stream that contains every integer starting at 'start'
-    def countFrom(start:Int) : Stream[Int] = Stream.from(start+1)
+    def countFrom(start:Int) : Stream[Int] =
+        throw new Exception("Not Implemented")
 
     // return a stream that contains the square of every integer starting at 'start'
-    def squaresFrom(start:Int) : Stream[Int] = Stream.from(start).map(x=> x*x)
+    def squaresFrom(start:Int) : Stream[Int] =
+        throw new Exception("Not Implemented")
 
     // return a stream that contains the product of factors from two streams
-    def productOfStreams(aFactors:Stream[Int], bFactors:Stream[Int]) : Stream[Int] = aFactors.zip(bFactors).map(pair => pair._1 * pair._2)
-
-    def allFib(current:Int, next:Int) : Stream[Int] = current #:: allFib(next,current+next)
-
+    def productOfStreams(aFactors:Stream[Int], bFactors:Stream[Int]) : Stream[Int] = 
+        throw new Exception("Not Implemented")
     // Return a stream of N fibonacci numbers starting at the beginning
-    def firstNFibonacciNumbers(n:Int): Stream[Int] = allFib(0,1).take(n)
+    def firstNFibonacciNumbers(n:Int): Stream[Int] = throw new Exception("Not Implemented")
 
     // Determine if n is a Fibonacci number
-    def isFibNumber(n: Int): Boolean = allFib(0,1).takeWhile(x=>x<=n).contains(n)
+    def isFibNumber(n: Int): Boolean = throw new Exception("Not Implemented")
 
     // Sum all the Fibonacci number between lower and upper inclusive.
-    def sumSomeFib(lower: Int, upper: Int): Int = allFib(0,1).filter(x=> x>=lower).takeWhile(x=>x<=upper).sum
+    def sumSomeFib(lower: Int, upper: Int): Int = throw new Exception("Not Implemented")
 
     // Determine if the text occurs somewhere in the stream. Code as if the stream was accessing a very large file that would not fit in memory.
     def isTextInStream(stream: Stream[String], text: String): Boolean =
-        text.length() == stream.flatten(chunk => chunk)
-          .foldLeft(0) (
-            (len, ch) => if (len == text.length()-1) len
-            else if (text(len) == ch) len+1
-            else 0
-        ) + 1
+        throw new Exception("Not Implemented")
 
 
     // A standard Sudoku puzzle contains 81 cells, in a 9 by 9 grid, and has 9 zones, each zone being the
