@@ -6,6 +6,24 @@ object Code {
         "Hello World!"
     }
 
+    // This function should sum all of the values in the input sequence in parallel way to
+    // take advantage of multiple cores
+    // This function is broken. Fix it so it always returns the correct result.
+    def imparitiveSumToFunctional(list:scala.collection.parallel.ParSeq[Int]):Int ={
+        var accumulator = 0
+        list.map(x=> {accumulator += x; x})
+        return accumulator
+    }
+
+    // return a stream that contains every integer starting at 'start'
+    def countFrom(start:Int) : Stream[Int] = Stream.from(start+1)
+
+    // return a stream that contains the square of every integer starting at 'start'
+    def squaresFrom(start:Int) : Stream[Int] = Stream.from(start).map(x=> x*x)
+
+    // return a stream that contains the product of factors from two streams
+    def productOfStreams(aFactors:Stream[Int], bFactors:Stream[Int]) : Stream[Int] = aFactors.zip(bFactors).map(pair => pair._1 * pair._2)
+
     def allFib(current:Int, next:Int) : Stream[Int] = current #:: allFib(next,current+next)
 
     // Return a stream of N fibonacci numbers starting at the beginning
