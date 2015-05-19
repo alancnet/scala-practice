@@ -8,7 +8,7 @@ object Tests {
 
     def parallelSumTest() = {
         val source1 = List.range(10,10000).par
-        val actual = Code.imparitiveSumToFunctional(source1)
+        val actual = Code.imperativeSumToFunctional(source1)
         val expected = 49994955
         Assert.isTrue(actual == expected, f"expected $expected but got $actual")
     }

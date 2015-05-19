@@ -4,15 +4,6 @@ object Code {
     // Returns "Hello World!"
     def helloWorld() : String = throw new Exception("Not Implemented")
 
-    // This function should sum all of the values in the input sequence in parallel way to
-    // take advantage of multiple cores
-    // This function is broken. Fix it so it always returns the correct result.
-    def imparitiveSumToFunctional(list:scala.collection.parallel.ParSeq[Int]):Int ={
-        var accumulator = 0
-        list.map(x=> {accumulator += x; x})
-        return accumulator
-    }
-
     // return a stream that contains every integer starting at 'start'
     def countFrom(start:Int) : Stream[Int] =
         throw new Exception("Not Implemented")
@@ -29,6 +20,15 @@ object Code {
 
     // Determine if n is a Fibonacci number
     def isFibNumber(n: Int): Boolean = throw new Exception("Not Implemented")
+
+    // This function should sum all of the values in the input sequence in parallel way to
+    // take advantage of multiple cores
+    // This function is broken. Fix it so it always returns the correct result.
+    def imperativeSumToFunctional(list:scala.collection.parallel.ParSeq[Int]):Int ={
+        var accumulator = 0
+        list.map(x=> {accumulator += x; x})
+        return accumulator
+    }
 
     // Sum all the Fibonacci number between lower and upper inclusive.
     def sumSomeFib(lower: Int, upper: Int): Int = throw new Exception("Not Implemented")
