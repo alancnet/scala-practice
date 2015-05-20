@@ -2,29 +2,22 @@ import scala.util.Random
 
 object Code {
     // Returns "Hello World!"
-    def helloWorld() : String = {
-        "Hello World!"
-    }
+    def helloWorld() : String = ???
 
-    def allFib(current:Int, next:Int) : Stream[Int] = current #:: allFib(next,current+next)
+    // An endless stream of fibionacci numbers. Hint: current #:: ???
+    def allFib(current:Int, next:Int) : Stream[Int] = ???
 
     // Return a stream of N fibonacci numbers starting at the beginning
-    def firstNFibonacciNumbers(n:Int): Stream[Int] = allFib(0,1).take(n)
+    def firstNFibonacciNumbers(n:Int): Stream[Int] = ???
 
     // Determine if n is a Fibonacci number
-    def isFibNumber(n: Int): Boolean = allFib(0,1).takeWhile(x=>x<=n).contains(n)
+    def isFibNumber(n: Int): Boolean = ???
 
     // Sum all the Fibonacci number between lower and upper inclusive.
-    def sumSomeFib(lower: Int, upper: Int): Int = allFib(0,1).filter(x=> x>=lower).takeWhile(x=>x<=upper).sum
+    def sumSomeFib(lower: Int, upper: Int): Int = ???
 
     // Determine if the text occurs somewhere in the stream. Code as if the stream was accessing a very large file that would not fit in memory.
-    def isTextInStream(stream: Stream[String], text: String): Boolean =
-        text.length() == stream.flatten(chunk => chunk)
-          .foldLeft(0) (
-            (len, ch) => if (len == text.length()-1) len
-            else if (text(len) == ch) len+1
-            else 0
-        ) + 1
+    def isTextInStream(stream: Stream[String], text: String): Boolean = ???
 
 
     // A standard Sudoku puzzle contains 81 cells, in a 9 by 9 grid, and has 9 zones, each zone being the
@@ -38,9 +31,7 @@ object Code {
     // To solve: each number 1-9 must exist exactly 9 times, and never in the same row or same column as its self
     // The only valid values are 1-9
     // The more elegant the approach the better
-    def solveSudoku(sudokuBoard: Array[Int]): Array[Int] = {
-        throw new Exception("Not Implemented")
-    }
+    def solveSudoku(sudokuBoard: Array[Int]): Array[Int] = ???
 
     //Monkeys and Coconuts https://youtu.be/U9qU20VmvaU?t=43s
     //
@@ -53,9 +44,7 @@ object Code {
     //
     //The next morning, they all separate the remaining pile and there are no coconuts left for the monkey.
     //How many coconuts did they have in the pile the night before?
-    def monkeysAndCoconuts(sailors: Int) : String = {
-        throw new Exception("Not Implemented");
-    }
+    def monkeysAndCoconuts(sailors: Int) : String = ???
 
 
 

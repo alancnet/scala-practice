@@ -1,7 +1,7 @@
 var code = {
     // Returns "Hello World!"
     helloWorld: function() {
-        throw new Error("Not Implemented");
+        return "Hello World!";
     },
         
     //Monkeys and Coconuts https://youtu.be/U9qU20VmvaU?t=43s

@@ -40,6 +40,13 @@ object Tests {
         assertNisFib(9,false)
     }
 
+    def allFibTest() = {
+        Assert.areEqual(
+            Code.allFib(0, 1).take(20).mkString(","), 
+            "0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181"
+        )
+    }
+
     def firstNFibonacciNumbersTest() = {
         def assertFirstNFib (n:Int, expected:Stream[Int]) = {
             val actual = Code.firstNFibonacciNumbers(n).toList ; Assert.isTrue(actual == expected, f"The first $n fib are $expected; But you had $actual")

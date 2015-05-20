@@ -71,37 +71,37 @@ namespace test
                 string combo = GetKeyCombo(keyInfo);
                 
                 switch (combo) {
-                    case "D1": 
-                        EnableCSharp = !EnableCSharp;
-                        break;
-                    case "D2": 
-                        EnableFSharp = !EnableFSharp;
-                        break;
-                    case "D3": 
+                    case "F1": 
                         EnableScala = !EnableScala;
                         break;
-                    case "D4": 
+                    case "F2": 
+                        EnableFSharp = !EnableFSharp;
+                        break;
+                    case "F3": 
+                        EnableCSharp = !EnableCSharp;
+                        break;
+                    case "F4": 
                         EnableJavaScript = !EnableJavaScript;
                         break;
-                    case "Shift-D1":
-                        EnableCSharp = true;
-                        EnableFSharp = false;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-D2":
-                        EnableCSharp = false;
-                        EnableFSharp = true;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-D3":
+                    case "Shift-F1":
                         EnableCSharp = false;
                         EnableFSharp = false;
                         EnableScala = true;
                         EnableJavaScript = false;
                         break;
-                    case "Shift-D4":
+                    case "Shift-F2":
+                        EnableCSharp = false;
+                        EnableFSharp = true;
+                        EnableScala = false;
+                        EnableJavaScript = false;
+                        break;
+                    case "Shift-F3":
+                        EnableCSharp = true;
+                        EnableFSharp = false;
+                        EnableScala = false;
+                        EnableJavaScript = false;
+                        break;
+                    case "Shift-F4":
                         EnableCSharp = false;
                         EnableFSharp = false;
                         EnableScala = false;
@@ -135,9 +135,9 @@ namespace test
                     Console.ResetColor();
                     ClearBuild();
                     var results = CollectMany(new Func<IEnumerable<Result>>[] {
-                        CSharp,
-                        FSharp,
                         Scala,
+                        FSharp,
+                        CSharp,
                         JavaScript
                     });
         
@@ -182,11 +182,11 @@ namespace test
             var y = Math.Max(2, Console.CursorTop);
             Console.CursorLeft = 0;
             Console.CursorTop = 0;
-            PrintMenuItem("1", "CSharp", EnableCSharp);
-            PrintMenuItem("2", "FSharp", EnableFSharp);
-            PrintMenuItem("3", "Scala", EnableScala);
-            PrintMenuItem("4", "JavaScript", EnableJavaScript);
-            PrintMenuItem("F5", "Rebuild", null);
+            PrintMenuItem("F1", "Scala", EnableScala);
+            PrintMenuItem("F2", "FSharp", EnableFSharp);
+            PrintMenuItem("F3", "CSharp", EnableCSharp);
+            PrintMenuItem("F4", "JavaScript", EnableJavaScript);
+            PrintMenuItem("F5", "►", null);
             Console.WriteLine("".PadRight(Console.BufferWidth));
             Console.CursorLeft = x;
             Console.CursorTop = y;
