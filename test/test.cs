@@ -39,7 +39,7 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar code.scala code\\assert.scala code\\tests.scala code\\main.scala"));
+                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar src\\main\\scala\\* src\\test\\scala\\*"));
                 if (File.Exists("../bin/scala.jar"))
                     results.AddRange(Exec("..\\bin", "%SCALAEXE%", "-cp scala.jar Main"));
             }
@@ -64,6 +64,8 @@ namespace test
         static void Main(string[] args)
         {
             Task.Factory.StartNew(Compiler);
+            WatchForChanges("../src/main/scala", "*");
+            WatchForChanges("../src/test/scala", "*");
             WatchForChanges("../code", "*");
             WatchForChanges("..", "code.*");
             while (true) {
