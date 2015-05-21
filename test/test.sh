@@ -22,9 +22,6 @@ if [ -z "$SCALAC" ]; then SCALAC=$(which scalac); fi
 # Find C# Compiler
 if [ -z "$CSC" ]; then CSC=$(which mcs); fi
 
-# Find F# Compiler
-if [ -z "$FSC" ]; then FSC=$(which fsharpc); fi
-
 echo JAVAEXE=$JAVAEXE
 echo SCALAEXE=$SCALAEXE
 echo JSEXE=$JSEXE
@@ -32,7 +29,6 @@ echo MONOEXE=$MONOEXE
 echo JAVAC=$JAVAC
 echo SCALAC=$SCALAC
 echo CSC=$CSC
-echo FSC=$FSC
 
 export JAVAEXE=$JAVAEXE
 export SCALAEXE=$SCALAEXE
@@ -41,7 +37,6 @@ export MONOEXE=$MONOEXE
 export JAVAC=$JAVAC
 export SCALAC=$SCALAC
 export CSC=$CSC
-export FSC=$FSC
 
 
 ERRS=0
@@ -53,8 +48,7 @@ if [ -z "$MONOEXE" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Mono. P
 if [ -z "$JAVAC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Java Compiler. Please make sure JDK is installed.; fi
 if [ -z "$SCALAC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Scala Compiler. Please make sure Scala is installed.; fi
 if [ -z "$CSC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find C# Compiler. Please make sure Mono is installed.; fi
-if [ -z "$FSC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find F# Compiler. Please make sure Mono is installed.; fi
-if [ "$(expr $ERRS)" -gt "0" ]; then 
+if [ "$(expr $ERRS)" -gt "0" ]; then
     bash -c "read -n 1 -r -p \"Press any key to continue...\""
     echo;
 fi
