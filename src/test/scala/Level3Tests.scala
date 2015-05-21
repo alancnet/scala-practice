@@ -92,6 +92,6 @@ object Level3Tests {
     val sailors = 5
     val actualCoconuts = Level3Code.monkeysAndCoconuts(sailors)
     val expectedCoconuts = 3121
-    Assert.areEqual(expectedCoconuts == actualCoconuts, f"The $sailors sailors started with $expectedCoconuts but you gave them $actualCoconuts")
+    Assert.areEqual(expectedCoconuts, actualCoconuts)
   }
 }
