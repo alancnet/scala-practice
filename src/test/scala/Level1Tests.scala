@@ -1,10 +1,11 @@
 
 object Level1Tests {
-
+  
+  @Rank(1)
   def helloWorldTest() {
     Assert.areEqual("Hello World!", Level1Code.helloWorld());
   }
-
+  @Rank(2)
   def countFromTest() = {
     val actual1 = Level1Code.countFrom(0).take(10000)
     val actual2 = Level1Code.countFrom(10000).take(256)
@@ -12,6 +13,7 @@ object Level1Tests {
     Assert.isTrue(actual2.min == 10000 && actual2.max == 10255 && actual2.length == 256)
   }
 
+  @Rank(3)
   def squaresFromTest() = {
     val actual1 = Level1Code.squaresFrom(0).take(10000)
     val actual2 = Level1Code.squaresFrom(10000).take(500)
@@ -19,6 +21,7 @@ object Level1Tests {
     Assert.isTrue(actual2.min == 100000000 && actual2.max == 110229001 && actual2.length == 500, f"${actual2.min} ${actual2.max} ${actual2.length}")
   }
 
+  @Rank(4)
   def productOfStreamsTest() = {
     val source1 = Level1Code.countFrom(0).take(100)
     val source2 = Level1Code.countFrom(10).take(100)

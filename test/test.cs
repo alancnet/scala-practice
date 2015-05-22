@@ -39,9 +39,9 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar src\\main\\scala\\* src\\test\\scala\\*"));
-                if (File.Exists("../bin/scala.jar"))
-                    results.AddRange(Exec("..\\bin", "%SCALAEXE%", "-cp scala.jar Main"));
+                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d target\\classes src\\main\\scala\\* src\\test\\scala\\* src\\test\\java\\*"));
+                results.AddRange(Exec("..", "%JAVAC%", "-nowarn -cp target\\classes -d target\\classes src\\test\\java\\*"));
+                results.AddRange(Exec("..", "%SCALAEXE%", "-cp target\\classes Main"));
             }
             return results;
         }
