@@ -10,7 +10,8 @@ object Level2Code {
   // Determine if n is a Fibonacci number
   def isFibNumber(n: Int): Boolean = ???
 
-  // Sum all the Fibonacci number between lower and upper inclusive.
+  // Sum all of the Fibonacci numbers between lower and upper inclusive.
+  // Note that these are NOT the indexes of the numbers, but the numbers themselves.
   def sumSomeFib(lower: Int, upper: Int): Int = ???
 
   // This function should sum all of the values in the input sequence in parallel way to
