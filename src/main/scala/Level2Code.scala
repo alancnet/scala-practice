@@ -28,6 +28,9 @@ object Level2Code {
 
   // Determine if the text occurs somewhere in the stream.
   // Code as if the stream was accessing a very large file that would not fit in memory.
+  // 'text' is larger then a single stream, and is not aligned with
+  // a string in the stream. You will have to handle the text being spread
+  // across multiple strings in the stream
   def isTextInStream(stream: Stream[String], text: String): Boolean = ???
 
 }
