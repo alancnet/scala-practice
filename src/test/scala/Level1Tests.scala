@@ -55,15 +55,15 @@ object Level1Tests {
   }
 
   def squareAllTest(): Unit = {
-    Assert.areEqual(Array[Int](1,4,9,16,25), Level1Code.squareAll(Array[Int](1,2,3,4,5)))
+    Assert.areEqual(Array[Int](1,4,9,16,25).toSeq, Level1Code.squareAll(Array[Int](1,2,3,4,5)).toSeq)
   }
 
   def cubeAllTest(): Unit = {
-    Assert.areEqual(Array[Int](1,8,27,64,125), Level1Code.cubeAll(Array[Int](1,2,3,4,5)))
+    Assert.areEqual(Array[Int](1,8,27,64,125).toSeq, Level1Code.cubeAll(Array[Int](1,2,3,4,5)).toSeq)
   }
 
   def productAllTest(): Unit = {
-    Assert.areEqual(Array[Int](2,5,12,20,30), Level1Code.productAll(Array[Int](1,2,3,4,5), Array[Int](2,3,4,5,6)))
+    Assert.areEqual(Array[Int](2,6,12,20,30).toSeq, Level1Code.productAll(Array[Int](1,2,3,4,5), Array[Int](2,3,4,5,6)).toSeq)
   }
 
   def sumAllTest(): Unit = {
@@ -71,7 +71,7 @@ object Level1Tests {
   }
 
   def reverseTest(): Unit = {
-    Assert.areEqual(Array[Int](1,5,1,2,1,9,1,3), Level1Code.reverse(Array[Int](3,1,9,1,2,1,5,1)))
+    Assert.areEqual(Array[Int](1,5,1,2,1,9,1,3).toSeq, Level1Code.reverse(Array[Int](3,1,9,1,2,1,5,1)).toSeq)
   }
 
   def countFromTest() = {
