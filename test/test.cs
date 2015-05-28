@@ -31,7 +31,7 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableJavaScript)
             {
-                results.AddRange(Exec("..", "%JSEXE%", "code\\main.js"));
+                results.AddRange(Exec("..", "%JSEXE%", "src\\main\\js\\main.js"));
             }
             return results;
         }
@@ -45,8 +45,8 @@ namespace test
             Task.Factory.StartNew(Compiler);
             WatchForChanges("../src/main/scala", "*");
             WatchForChanges("../src/test/scala", "*");
-            WatchForChanges("../code", "*");
-            WatchForChanges("..", "code.*");
+            WatchForChanges("../src/main/js", "*");
+            WatchForChanges("../src/test/js", "*");
             while (true) {
                 var keyInfo = Console.ReadKey(true);
                 string combo = GetKeyCombo(keyInfo);
