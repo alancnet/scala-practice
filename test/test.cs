@@ -11,37 +11,16 @@ namespace test
 {
     class Program
     {
-
-        static IEnumerable<Result> CSharp()
-        {
-            List<Result> results = new List<Result>();
-            if (EnableCSharp) 
-            {
-                results.AddRange(Exec("..", "%CSC%", "/nologo /out:bin/csharp.exe code.cs code\\assert.cs code\\tests.cs code\\main.cs"));
-                results.AddRange(Exec("..\\bin", "..\\bin\\csharp.exe", ""));
-            }
-            return results;
-        }
-
-        static IEnumerable<Result> FSharp()
-        {
-            List<Result> results = new List<Result>();
-            if (EnableFSharp) 
-            {
-                results.AddRange(Exec("..", "%FSC%", "/nologo --target:exe /out:bin/fsharp.exe code.fs code\\assert.fs code\\tests.fs code\\main.fs"));
-                results.AddRange(Exec("..\\bin", "..\\bin\\fsharp.exe", ""));
-            }
-            return results;
-        }
-
         static IEnumerable<Result> Scala()
         {
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar code.scala code\\assert.scala code\\tests.scala code\\main.scala"));
+                var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
+                var test = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
+                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar " + main + " " + test));
                 if (File.Exists("../bin/scala.jar"))
-                    results.AddRange(Exec("..\\bin", "%SCALAEXE%", "-cp scala.jar Main"));
+                    results.AddRange(Exec("../bin", "%SCALAEXE%", "-cp scala.jar Main"));
             }
             return results;
         }
@@ -56,14 +35,14 @@ namespace test
         }
 
         static AutoResetEvent needsBuild = new AutoResetEvent(true);
-        static bool EnableCSharp = true;
-        static bool EnableFSharp = true;
         static bool EnableScala = true;
         static bool EnableJavaScript = true;
         
         static void Main(string[] args)
         {
             Task.Factory.StartNew(Compiler);
+            WatchForChanges("../src/main/scala", "*");
+            WatchForChanges("../src/test/scala", "*");
             WatchForChanges("../code", "*");
             WatchForChanges("..", "code.*");
             while (true) {
@@ -71,39 +50,17 @@ namespace test
                 string combo = GetKeyCombo(keyInfo);
                 
                 switch (combo) {
-                    case "D1": 
-                        EnableCSharp = !EnableCSharp;
-                        break;
-                    case "D2": 
-                        EnableFSharp = !EnableFSharp;
-                        break;
-                    case "D3": 
+                    case "F1": 
                         EnableScala = !EnableScala;
                         break;
-                    case "D4": 
+                    case "F2":
                         EnableJavaScript = !EnableJavaScript;
                         break;
-                    case "Shift-D1":
-                        EnableCSharp = true;
-                        EnableFSharp = false;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-D2":
-                        EnableCSharp = false;
-                        EnableFSharp = true;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-D3":
-                        EnableCSharp = false;
-                        EnableFSharp = false;
+                    case "Shift-F1":
                         EnableScala = true;
                         EnableJavaScript = false;
                         break;
-                    case "Shift-D4":
-                        EnableCSharp = false;
-                        EnableFSharp = false;
+                    case "Shift-F2":
                         EnableScala = false;
                         EnableJavaScript = true;
                         break;
@@ -135,8 +92,6 @@ namespace test
                     Console.ResetColor();
                     ClearBuild();
                     var results = CollectMany(new Func<IEnumerable<Result>>[] {
-                        CSharp,
-                        FSharp,
                         Scala,
                         JavaScript
                     });
@@ -182,11 +137,9 @@ namespace test
             var y = Math.Max(2, Console.CursorTop);
             Console.CursorLeft = 0;
             Console.CursorTop = 0;
-            PrintMenuItem("1", "CSharp", EnableCSharp);
-            PrintMenuItem("2", "FSharp", EnableFSharp);
-            PrintMenuItem("3", "Scala", EnableScala);
-            PrintMenuItem("4", "JavaScript", EnableJavaScript);
-            PrintMenuItem("F5", "Rebuild", null);
+            PrintMenuItem("F1", "Scala", EnableScala);
+            PrintMenuItem("F2", "JavaScript", EnableJavaScript);
+            PrintMenuItem("F5", "►", null);
             Console.WriteLine("".PadRight(Console.BufferWidth));
             Console.CursorLeft = x;
             Console.CursorTop = y;

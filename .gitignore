@@ -1,1 +1,9 @@
 bin/
+.idea
+.idea/ 
+*.orig
+
+.cache
+.classpath
+.project
+target

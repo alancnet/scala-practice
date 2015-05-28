@@ -26,6 +26,85 @@ var tests = {
         assert.isTrue(code.isTextInStream(this.stream("Whatever Whatever Whatever Whatever Whatever Whatever Whatever FINDME Whatever"), "FINDME"));
         assert.isTrue(code.isTextInStream(this.stream("Whatever FINDME1238901238901230479823798 Whatever"), "FINDME1238901238901230479823798"));
         assert.isFalse(code.isTextInStream(this.stream("Whatever FINDME Whatever"), "Hello World"));
+    },
+    iterateGameOfLifeTest: function() {
+        var startField = [
+            "               ",
+            "  X            ",
+            "   X           ",
+            " XXX           ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               "
+        ];
+        var nextField = [
+            "               ",
+            "               ",
+            " X X           ",
+            "  XX           ",
+            "  X            ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               "
+        ];
+        var endField = [
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "               ",
+            "         X X   ",
+            "          XX   ",
+            "          X    ",
+            "               "
+        ];
+        
+        var decodeField = function(field) {
+            return field.map(function(l) { 
+                return l.split("")
+                    .map(function(c) {
+                        return c === "X";
+                    });
+            });
+        };
+        var stringify = function(field) {
+            return "\n" + 
+                field.map(function(l) {
+                    return l.map(function(c) {
+                        return c ? "X" : "-";
+                    }).join("");
+                }).join("\n") +
+                "\n";
+        }
+        var testIteration = function(start, end, generations) {
+            var startData = decodeField(start);
+            var nextData = startData;
+            for (var g = 0; g < generations; g++) nextData = code.iterateLife(nextData);
+            assert.areEqual(stringify(decodeField(end)), stringify(nextData), null);
+            assert.areEqual(stringify(decodeField(start)), stringify(startData), "Original state should not be modified.");
+        }
+        
+        testIteration(startField, nextField, 1);
+        testIteration(nextField, endField, 32);
+        
     }
 };
 module.exports = tests;
