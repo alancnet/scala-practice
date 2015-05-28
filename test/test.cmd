@@ -38,18 +38,12 @@ if "%CSC%"=="" (
     for /f "delims=" %%p in ('dir /s /b "%windir%\Microsoft.NET\Framework\csc.exe"') do set CSC=%%p
 )
 
-:: Find F# Compiler
-if "%FSC%"=="" (
-    for /f "delims=" %%p in ('dir /s /b "%p32%\Microsoft SDKs\F#\fsc.exe"') do set FSC=%%p
-)
-
 echo JAVAEXE=%JAVAEXE%
 echo SCALAEXE=%SCALAEXE%
 echo JSEXE=%JSEXE%
 echo JAVAC=%JAVAC%
 echo SCALAC=%SCALAC%
 echo CSC=%CSC%
-echo FSC=%FSC%
 
 set /A ERRS=0
 
@@ -59,7 +53,6 @@ if "%JSEXE%"=="" SET /A ERRS=%ERRS%+1 & echo Unable to find JavaScript. Please m
 if "%JAVAC%"=="" SET /A ERRS=%ERRS%+1 & echo Unable to find Java Compiler. Please make sure JDK is installed.
 if "%SCALAC%"=="" SET /A ERRS=%ERRS%+1 & echo Unable to find Scala Compiler. Please make sure Scala is installed.
 if "%CSC%"=="" SET /A ERRS=%ERRS%+1 & echo Unable to find C# Compiler. Please make sure .NET Framework is installed. 
-if "%FSC%"=="" SET /A ERRS=%ERRS%+1 & echo Unable to find F# Compiler. Please make sure .NET Framework is installed. 
 
 if %ERRS% GTR 0 pause
 

@@ -11,37 +11,18 @@ namespace test
 {
     class Program
     {
-
-        static IEnumerable<Result> CSharp()
-        {
-            List<Result> results = new List<Result>();
-            if (EnableCSharp) 
-            {
-                results.AddRange(Exec("..", "%CSC%", "/nologo /out:bin/csharp.exe code.cs code\\assert.cs code\\tests.cs code\\main.cs"));
-                results.AddRange(Exec("..\\bin", "..\\bin\\csharp.exe", ""));
-            }
-            return results;
-        }
-
-        static IEnumerable<Result> FSharp()
-        {
-            List<Result> results = new List<Result>();
-            if (EnableFSharp) 
-            {
-                results.AddRange(Exec("..", "%FSC%", "/nologo --target:exe /out:bin/fsharp.exe code.fs code\\assert.fs code\\tests.fs code\\main.fs"));
-                results.AddRange(Exec("..\\bin", "..\\bin\\fsharp.exe", ""));
-            }
-            return results;
-        }
-
         static IEnumerable<Result> Scala()
         {
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d target\\classes src\\main\\scala\\* src\\test\\scala\\* src\\test\\java\\*"));
-                results.AddRange(Exec("..", "%JAVAC%", "-nowarn -cp target\\classes -d target\\classes src\\test\\java\\*"));
-                results.AddRange(Exec("..", "%SCALAEXE%", "-cp target\\classes Main"));
+                var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
+                var testScala = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
+                var testJava = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/java")).EnumerateFiles().Select(x=> x.FullName));
+                var targetClasses = new System.IO.DirectoryInfo("../target/classes").FullName;
+                results.AddRange(Exec("..", "%SCALAC%", String.Format("-nowarn -d {0} {1} {2} {3}", targetClasses, main, testScala, testJava)));
+                results.AddRange(Exec("..", "%JAVAC%", String.Format("-nowarn -cp {0} -d {0} {1}", targetClasses, testJava)));
+        		results.AddRange(Exec("../bin", "%SCALAEXE%", String.Format("-cp {0} Main", targetClasses)));
             }
             return results;
         }
@@ -56,8 +37,6 @@ namespace test
         }
 
         static AutoResetEvent needsBuild = new AutoResetEvent(true);
-        static bool EnableCSharp = true;
-        static bool EnableFSharp = true;
         static bool EnableScala = true;
         static bool EnableJavaScript = true;
         
@@ -76,36 +55,14 @@ namespace test
                     case "F1": 
                         EnableScala = !EnableScala;
                         break;
-                    case "F2": 
-                        EnableFSharp = !EnableFSharp;
-                        break;
-                    case "F3": 
-                        EnableCSharp = !EnableCSharp;
-                        break;
-                    case "F4": 
+                    case "F2":
                         EnableJavaScript = !EnableJavaScript;
                         break;
                     case "Shift-F1":
-                        EnableCSharp = false;
-                        EnableFSharp = false;
                         EnableScala = true;
                         EnableJavaScript = false;
                         break;
                     case "Shift-F2":
-                        EnableCSharp = false;
-                        EnableFSharp = true;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-F3":
-                        EnableCSharp = true;
-                        EnableFSharp = false;
-                        EnableScala = false;
-                        EnableJavaScript = false;
-                        break;
-                    case "Shift-F4":
-                        EnableCSharp = false;
-                        EnableFSharp = false;
                         EnableScala = false;
                         EnableJavaScript = true;
                         break;
@@ -138,8 +95,6 @@ namespace test
                     ClearBuild();
                     var results = CollectMany(new Func<IEnumerable<Result>>[] {
                         Scala,
-                        FSharp,
-                        CSharp,
                         JavaScript
                     });
         
@@ -185,9 +140,7 @@ namespace test
             Console.CursorLeft = 0;
             Console.CursorTop = 0;
             PrintMenuItem("F1", "Scala", EnableScala);
-            PrintMenuItem("F2", "FSharp", EnableFSharp);
-            PrintMenuItem("F3", "CSharp", EnableCSharp);
-            PrintMenuItem("F4", "JavaScript", EnableJavaScript);
+            PrintMenuItem("F2", "JavaScript", EnableJavaScript);
             PrintMenuItem("F5", "►", null);
             Console.WriteLine("".PadRight(Console.BufferWidth));
             Console.CursorLeft = x;
