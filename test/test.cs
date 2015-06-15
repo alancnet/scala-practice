@@ -211,8 +211,12 @@ namespace test
 
         static void ClearBuild()
         {
-            if (!Directory.Exists("../bin")) Directory.CreateDirectory("../bin");
-            foreach (var file in Directory.GetFiles("../bin")) File.Delete(file);
+            string[] directories = { "../bin", "../target/classes" };
+
+	        foreach (string value in directories) {
+                if (!Directory.Exists(value)) Directory.CreateDirectory(value);
+                foreach (var file in Directory.GetFiles(value)) File.Delete(file);
+	        }
         }
 
         static bool IsWindows() {
@@ -228,7 +232,7 @@ namespace test
 
         static IEnumerable<Result> Exec(string dir, string cmd, string args)
         {
-            if (!IsWindows ()) 
+            if (!IsWindows ())
             {
                 dir = dir.Replace ('\\', '/');
                 cmd = cmd.Replace ('\\', '/');
