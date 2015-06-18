@@ -310,7 +310,7 @@ namespace test
                 proc.BeginOutputReadLine();
                 proc.BeginErrorReadLine();
 
-                proc.WaitForExit(10000);
+                proc.WaitForExit(20000);
 
                 if (!proc.HasExited)
                 {
@@ -318,7 +318,7 @@ namespace test
                     results.Add(new Result
                     {
                         Type = ResultType.Fail,
-                        Text = String.Format("{0} failed to execute within 10000ms.", filename)
+                        Text = String.Format("{0} failed to execute within 20000ms.", filename)
                     });
                 } else if (!done) {
                     Thread.Sleep(1000);
