@@ -87,7 +87,7 @@ var level1tests = {
     linkedListMaxTest: function () {
 
         var list = Object.create(code.linkedList);
-        for (var i = 10; i <= 15; i++) {
+        for (var i = 10; i < 15; i++) {
             list.add(i);
         };
         assert.areEqual(14, list.max());
@@ -95,7 +95,7 @@ var level1tests = {
     linkedListLengthTest: function () {
 
         var list = Object.create(code.linkedList);
-        for (var i = 3; i <= 8; i++) {
+        for (var i = 3; i < 8; i++) {
             list.add(i);
         };
         assert.areEqual(5, list.length());
