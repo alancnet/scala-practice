@@ -53,9 +53,7 @@ namespace test
             sw.Start();
             Task.Factory.StartNew(Compiler);
             WatchForChanges("../src/main/scala", "*");
-            WatchForChanges("../src/test/scala", "*");
             WatchForChanges("../src/main/js", "*");
-            WatchForChanges("../src/test/js", "*");
             while (true) {
                 var keyInfo = Console.ReadKey(true);
                 string combo = GetKeyCombo(keyInfo);
