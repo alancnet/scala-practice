@@ -22,6 +22,9 @@ if [ -z "$SCALAC" ]; then SCALAC=$(which scalac); fi
 # Find C# Compiler
 if [ -z "$CSC" ]; then CSC=$(which mcs); fi
 
+# Find SBT
+if [ -z "$SBT" ]; then SBT=$(which sbt); fi
+
 echo JAVAEXE=$JAVAEXE
 echo SCALAEXE=$SCALAEXE
 echo JSEXE=$JSEXE
@@ -29,6 +32,7 @@ echo MONOEXE=$MONOEXE
 echo JAVAC=$JAVAC
 echo SCALAC=$SCALAC
 echo CSC=$CSC
+echo SBT=$SBT
 
 export JAVAEXE=$JAVAEXE
 export SCALAEXE=$SCALAEXE
@@ -37,6 +41,7 @@ export MONOEXE=$MONOEXE
 export JAVAC=$JAVAC
 export SCALAC=$SCALAC
 export CSC=$CSC
+export SBT=$SBT
 
 
 ERRS=0
@@ -48,6 +53,7 @@ if [ -z "$MONOEXE" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Mono. P
 if [ -z "$JAVAC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Java Compiler. Please make sure JDK is installed.; fi
 if [ -z "$SCALAC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find Scala Compiler. Please make sure Scala is installed.; fi
 if [ -z "$CSC" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find C# Compiler. Please make sure Mono is installed.; fi
+if [ -z "$SBT" ]; then ERRS=$(expr $ERRS + 1) && echo Unable to find SBT. Please make sure SBT is installed.; fi
 if [ "$(expr $ERRS)" -gt "0" ]; then
     bash -c "read -n 1 -r -p \"Press any key to continue...\""
     echo;

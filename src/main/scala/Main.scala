@@ -4,10 +4,10 @@ object Main {
 
     try {
       m.invoke(o);
-      println("PASS:" + m.getName)
+      println("[" + Console.GREEN + "PASS" + Console.RESET + "] " + m.getName)
     } catch {
       case e: Exception =>
-        println("FAIL:" + m.getName + ": " + e.getCause.getMessage)
+        println("[" + Console.RED + "FAIL" + Console.RESET + "] " + m.getName + ": " + e.getCause.getMessage)
     }
   }
 
@@ -38,5 +38,3 @@ object Main {
     println("Done!");
   }
 }
-
-

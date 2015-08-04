@@ -1,8 +1,10 @@
-import scala.Stream
-import scala.collection.immutable.Stream.consWrapper
-
 object Level2Tests {
 
+  @Rank(1)
+  def goldenTest() = {
+    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(1.0,1.0))
+    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(100.0,6.0))
+  }
   @Rank(1)
   def allFibTest() = {
     Assert.areEqual(
@@ -76,6 +78,14 @@ object Level2Tests {
     Assert.isFalse(Level2Code.isTextInStream(stringToStream(phrase2, 10), phrase1.substring(30, 45)))
     Assert.isFalse(Level2Code.isTextInStream(stringToStream(phrase1, 20), phrase2.substring(37, 53)))
     Assert.isFalse(Level2Code.isTextInStream(stringToStream(phrase2, 30), phrase1.substring(30, 45)))
+  }
+
+  @Rank(7)
+  def weirdNegNumberFilterTest() = {
+    Assert.areEqual(Seq(5, 2, -3, 9, 10), Level2Code.weirdNegNumberFilter(Seq(5, 2, -3, -4, 9, 10, -11)))
+    Assert.areEqual(Seq(5, 4, 3, 2, 1), Level2Code.weirdNegNumberFilter(Seq(5, 4, 3, 2, 1)))
+    Assert.areEqual(Seq(-1), Level2Code.weirdNegNumberFilter(Seq(-1, -2, -3, -4, -5)))
+    Assert.areEqual(Seq(), Seq())
   }
 
 }

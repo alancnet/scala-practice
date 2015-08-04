@@ -16,13 +16,21 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
-                var testScala = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
-                var testJava = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/java")).EnumerateFiles().Select(x=> x.FullName));
-                var targetClasses = new System.IO.DirectoryInfo("../target/classes").FullName;
-                results.AddRange(Exec("..", "%SCALAC%", String.Format("-nowarn -d {0} {1} {2} {3}", targetClasses, main, testScala, testJava)));
-                results.AddRange(Exec("..", "%JAVAC%", String.Format("-nowarn -cp {0} -d {0} {1}", targetClasses, testJava)));
-        		results.AddRange(Exec("../bin", "%SCALAEXE%", String.Format("-cp {0} Main", targetClasses)));
+                var sbt = Environment.ExpandEnvironmentVariables("%SBT%");
+                if (sbt == "") {
+                    var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
+                    var java = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/java")).EnumerateFiles().Select(x=> x.FullName));
+                    var targetClasses = new System.IO.DirectoryInfo("../target/classes").FullName;
+                    results.AddRange(Exec("..", "%SCALAC%", String.Format("-nowarn -d {0} {1} {2}", targetClasses, main, java)));
+                    results.AddRange(Exec("..", "%JAVAC%", String.Format("-nowarn -cp {0} -d {0} {1}", targetClasses, java)));
+                    results.AddRange(Exec("../bin", "%SCALAEXE%", String.Format("-cp {0} Main", targetClasses)));
+                } else {
+                    var tail = Exec("..", "%SBT%", String.Format("run"))
+                                   .Skip(3).ToList();
+                    results.AddRange(
+                        tail.Take(tail.Count - 1)
+                    );
+                }
             }
             return results;
         }
@@ -42,6 +50,7 @@ namespace test
         
         static void Main(string[] args)
         {
+            sw.Start();
             Task.Factory.StartNew(Compiler);
             WatchForChanges("../src/main/scala", "*");
             WatchForChanges("../src/test/scala", "*");
@@ -327,9 +336,13 @@ namespace test
             return results;
         }
 
+        private static System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+
         static void watcher_Changed(object sender, FileSystemEventArgs e)
         {
+            if (sw.ElapsedMilliseconds < 100) return;
             needsBuild.Set();
+            sw.Restart();
         }
     }
 
