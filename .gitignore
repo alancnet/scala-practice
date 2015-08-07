@@ -3,10 +3,9 @@ target/
 .idea
 .idea/ 
 *.orig
-.iml
+*.iml
 .ipr
 .iws
-.iml
 
 .cache
 .classpath
