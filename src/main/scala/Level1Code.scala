@@ -1,4 +1,3 @@
-
 object Level1Code {
 
   // Returns "Hello World!"
@@ -16,14 +15,14 @@ object Level1Code {
   // return the cube of a number
   def cube(a:Int):Int = ???
 
-  // return the square root of a perfect square
-  def sqrt(a:Int):Int = ???
-
   // return the Int quotient of a fraction
   def quotient(numerator:Int, denominator:Int):Int = ???
 
   // return the Int remainder of a fraction
   def remainder(numerator:Int, denominator:Int):Int = ???
+
+  // return the square root of perfect squares only.
+  def squareRootOfPerfectSquare(a:Int):Option[Int] = ???
 
   // return an array containing the square of each number
   // in the source array in the same order
