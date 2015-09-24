@@ -41,7 +41,7 @@ object Level2Code {
   // a string in the sequence. You will have to handle the text being spread
   // across multiple strings in the sequence
   // Example: "Hello", "World", and "Hello World" exist in Seq("Hell", "o Wor", "ld!!")
-  def isTextInStream(stream: Iterable[String], text: String): Boolean = ???
+  def isTextInStream(stream: Seq[String], text: String): Boolean = ???
 
   // Filter a sequence such that the result will contain all elements of the sequence
   // except negative numbers after the first occurrence of a negative number.

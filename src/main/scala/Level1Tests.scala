@@ -33,11 +33,13 @@ object Level1Tests {
     Assert.areEqual(64, Level1Code.cube(4))
   }
   @Rank(6)
-  def sqrtTest(): Unit = {
-    Assert.areEqual(1, Level1Code.sqrt(1))
-    Assert.areEqual(2, Level1Code.sqrt(4))
-    Assert.areEqual(4, Level1Code.sqrt(16))
-    Assert.areEqual(5, Level1Code.sqrt(25))
+  def squareRootOfPerfectSquareTest(): Unit = {
+    Assert.areEqual(Some(1), Level1Code.squareRootOfPerfectSquare(1))
+    Assert.areEqual(Some(2), Level1Code.squareRootOfPerfectSquare(4))
+    Assert.areEqual(Some(4), Level1Code.squareRootOfPerfectSquare(16))
+    Assert.areEqual(Some(5), Level1Code.squareRootOfPerfectSquare(25))
+    Assert.areEqual(None, Level1Code.squareRootOfPerfectSquare(2))
+    Assert.areEqual(None, Level1Code.squareRootOfPerfectSquare(-25))
   }
   @Rank(7)
   def quotientTest(): Unit = {
