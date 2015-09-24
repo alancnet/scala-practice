@@ -1,11 +1,13 @@
 bin/
 target/
-.idea
-.idea/ 
 *.orig
 *.iml
-.ipr
-.iws
+
+# IntelliJ files
+.idea
+.idea/ 
+*.ipr
+*.iws
 
 .cache
 .classpath
