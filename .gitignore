@@ -1,0 +1,13 @@
+bin/
+target/
+.idea
+.idea/ 
+*.orig
+.iml
+.ipr
+.iws
+
+.cache
+.classpath
+.project
+target
