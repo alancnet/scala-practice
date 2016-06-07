@@ -31,7 +31,7 @@ Run the tests as outlined below in a terminal window, and change the code to mak
 ## Running the test
 ### Windows
 
-- Clone this repository: `git clone https://gitlab.eventops.io/recruiting/codetest-2-studyguide.git`
+- Clone this repository: `https://github.com/AthlinksEngineering/recruiting-codetest-2-studyguide.git`
 - Or click the Download button above and unzip to a directory.
 - Using Windows Explorer, browse to `codetest-2-studyguide\test`, and double click on `test.cmd`
 
@@ -55,7 +55,7 @@ Run the tests as outlined below in a terminal window, and change the code to mak
         - Install brew (http://brew.sh)
         - In Terminal, run `brew install scala node`
     - Ubuntu: `sudo apt-get install git scala mono-devel nodejs npm openjdk-7-jdk`
-- Clone this repository: `git clone https://gitlab.eventops.io/recruiting/codetest-2-studyguide.git`
+- Clone this repository: `https://github.com/AthlinksEngineering/recruiting-codetest-2-studyguide.git`
 - Run the test script
   - `cd codetest-2-studyguide/test`
   - `sh test.sh`
