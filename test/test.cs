@@ -45,7 +45,7 @@ namespace test
         }
 
         static AutoResetEvent needsBuild = new AutoResetEvent(true);
-        static bool EnableScala = true;
+        static bool EnableScala = false;
         static bool EnableJavaScript = true;
         
         static void Main(string[] args)
