@@ -1,10 +1,10 @@
 object Level2Tests {
 
-  @Rank(1)
-  def goldenTest() = {
-    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(1.0,1.0))
-    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(100.0,6.0))
-  }
+//  @Rank(1)
+//  def goldenTest() = {
+//    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(1.0,1.0))
+//    Assert.isInRange(1.61800, 1.61806, Level2Code.goldenRatio(100.0,6.0))
+//  }
   @Rank(1)
   def allFibTest() = {
     Assert.areEqual(

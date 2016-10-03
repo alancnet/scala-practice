@@ -8,7 +8,7 @@ object Level2Code {
   // let d = b + c, then the ratio d / c is closer to the golden ratio
   // let e = c + d, then the ratio e / d is closer to the golden ratio
   // if you continue this process, the result will trend towards the golden ratio
-  def goldenRatio(a:Double, b:Double) : Double = ???
+//  def goldenRatio(a:Double, b:Double) : Double = ???
 
   // An endless stream of Fibonacci numbers. Hint: current #:: ???
   def allFib(current: Int, next: Int): Stream[Int] = ???
