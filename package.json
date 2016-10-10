@@ -7,7 +7,8 @@
     "little-alchemy": "latest",
     "rx": "latest",
     "immutable": "latest",
-    "babel": "latest"
+    "babel-preset-latest": "latest",
+    "babel-cli": "latest"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,8 +1,14 @@
 # Code Test
 ## Running the test
 ### Windows
- 
-Run test/test.cmd from Command Prompt
+
+Run test.cmd from Command Prompt
+
+```
+C:\archive> cd test
+
+C:\archive\test> test.cmd
+```
 
 Open and edit source code from the 'code' directory.
 
@@ -12,7 +18,13 @@ Press Ctrl-C to exit test monitor.
 
 ### Mac/Linux
 
-Run cd to test and sh test.sh from a terminal
+Run test.sh from a terminal
+
+```
+~/archive$ cd test
+
+~/archive/test$ sh test.sh
+```
 
 Open and edit source code from the 'code' directory.
 
