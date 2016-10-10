@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.IO;
 using System.Threading;
@@ -39,7 +39,7 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableJavaScript)
             {
-                results.AddRange(Exec("..", "%JSEXE%", "node_modules/babel/bin/babel-node.js src\\main\\js\\main.js"));
+                results.AddRange(Exec("..", "%JSEXE%", "node_modules/babel-cli/bin/babel-node.js --presets latest src\\main\\js\\main.js"));
             }
             return results;
         }
