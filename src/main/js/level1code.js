@@ -1,3 +1,4 @@
+var testData = require('./testData.js');
 var code = {
     // Returns "Hello World!"
     helloWorld: function () {
@@ -11,36 +12,6 @@ var code = {
     product: function (a, b) {
         throw new Error("Not Implemented");
     },
-    // Returns the square of a number
-    square: function (a) {
-        throw new Error("Not Implemented");
-    },
-    // Returns the cube of a number
-    cube: function (a) {
-        throw new Error("Not Implemented");
-    },
-    // Returns the square root of a perfect square
-    sqrt: function (a) {
-        throw new Error("Not Implemented");
-    },
-    // Returns the Int quotient of a fraction
-    quotient: function (numerator, denominator) {
-        throw new Error("Not Implemented");
-    },
-    // Returns the Int remainder of a fraction
-    remainder: function (numerator, denominator) {
-        throw new Error("Not Implemented");
-    },
-    // Returns an array containing the square of each number
-    // in the source array in the same order
-    squareAll: function (arr) {
-        throw new Error("Not Implemented");
-    },
-    // Returns an array containing the cube of each number
-    // in the source array in the same order
-    cubeAll: function (arr) {
-        throw new Error("Not Implemented");
-    },
     // Returns an array containing the product of an 'a' in array 'arrA' with
     // its respective 'b' in array 'arrB'
     productAll: function (arrA, arrB) {
@@ -50,9 +21,48 @@ var code = {
     sumAll: function (arr) {
         throw new Error("Not Implemented");
     },
-    // Reverses the array
-    reverse: function (arr) {
-        throw new Error("Not Implemented");
+    //Given an array of objects, some of the objects will contain bad data.
+    //Return a new array of objects that mimics the order of the original array
+    //while removing any items where the eventName property or eventDate
+    //property are either undefined, empty string, or for eventDate,
+    //are not parseable into a valid date via new Date().
+    getValidData: function (arr) {
+      throw new Error("Not Implemented");
+    },
+    //Given an array of objects, sort the array on two parameters.  The primary
+    //sort will be by eventDate, going from most recent to oldest. If they share
+    //the same date, sort them alphabetically on eventName from a to z.
+    getSortedData: function (arr) {
+      /*
+      sample array: [
+        {
+          eventName: 'Some excellent event',
+          eventDate: '2015-05-22'
+        },
+        ...
+      ]
+      */
+      throw new Error("Not Implemented");
+    },
+    //Given an array of objects, return the object representing the closest event
+    //in the future or the most recent event in the past.  That is,
+    //if there are multiple future dates, return the one closest to today, and
+    //if there are no future dates, return the event that occured most recently.
+    getLeastFutureOrMostRecent: function (arr) {
+      /*
+      sample array: [
+        {
+          eventName: 'Some excellent event',
+          eventDate: '2017-05-22'
+        },
+        ...
+      ]
+      */
+      throw new Error("Not Implemented");
+    }
+    //Return merged data from two promises
+    getCombinedEventData: function (promise1, promise2) {
+
     }
 };
 module.exports = code;
