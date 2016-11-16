@@ -1,6 +1,7 @@
 var assert = require('./assert.js');
 var code = require('./level1code.js');
 var testData = require('./testData.js');
+var _ = require('./lib/lodash');
 
 var level1tests = {
     helloWorldTest: function () {
@@ -34,7 +35,9 @@ var level1tests = {
         assert.areEqual(100, actual);
     },
     getValidDataTest: function () {
-        var actual = code.getValidData(testData.someValidAndInvalidData);
+        var original = testData.someValidAndInvalidData;
+        var theirs = _.cloneDeep(testData.someValidAndInvalidData);
+        var actual = code.getValidData(theirs);
         assert.isDeepEqual(
             [
                 {
@@ -52,9 +55,12 @@ var level1tests = {
             ],
             actual
         );
+        assert.isDeepEqual(original, theirs);
     },
     getSortedDataTest: function() {
-        var actual = code.getSortedData(testData.dataToSort);
+        var original = testData.dataToSort;
+        var theirs = _.cloneDeep(testData.dataToSort);
+        var actual = code.getSortedData(theirs);
         assert.isDeepEqual(
             [
                 {
@@ -80,9 +86,19 @@ var level1tests = {
             ],
             actual
         );
+        assert.isDeepEqual(original, theirs);
     },
     getLeastFutureOrMostRecentTest: function() {
-        var actual1 = code.getLeastFutureOrMostRecent(testData.leastFutureOrMostRecentData1);
+        var original1 = testData.leastFutureOrMostRecentData1;
+        var original2 = testData.leastFutureOrMostRecentData2;
+        var original3 = testData.leastFutureOrMostRecentData3;
+
+        var theirs1 = _.cloneDeep(testData.leastFutureOrMostRecentData1);
+        var theirs2 = _.cloneDeep(testData.leastFutureOrMostRecentData2);
+        var theirs3 = _.cloneDeep(testData.leastFutureOrMostRecentData3);
+
+
+        var actual1 = code.getLeastFutureOrMostRecent(theirs1);
         assert.isDeepEqual(
             {
                 eventName: 'Amazing Marathon',
@@ -90,7 +106,7 @@ var level1tests = {
             },
             actual1
         );
-        var actual2 = code.getLeastFutureOrMostRecent(testData.leastFutureOrMostRecentData2);
+        var actual2 = code.getLeastFutureOrMostRecent(theirs2);
         assert.isDeepEqual(
             {
                 eventName: 'Amazing Marathon',
@@ -98,7 +114,7 @@ var level1tests = {
             },
             actual2
         );
-        var actual3 = code.getLeastFutureOrMostRecent(testData.leastFutureOrMostRecentData3);
+        var actual3 = code.getLeastFutureOrMostRecent(theirs3);
         assert.isDeepEqual(
             {
                 eventName: 'Amazing Marathon',
@@ -106,6 +122,10 @@ var level1tests = {
             },
             actual3
         );
+
+        assert.isDeepEqual(original1, theirs1);
+        assert.isDeepEqual(original2, theirs2);
+        assert.isDeepEqual(original3, theirs3);
     },
     getCombinedEventDataTest: function () {
         var expected = [
@@ -126,7 +146,23 @@ var level1tests = {
         var actual2 = code.getCombinedEventData(testData.getPromise1(400), testData.getPromise2(200));
         var actual3 = code.getCombinedEventData(testData.getPromise1(100), testData.getPromise2(100));
 
-        Promise.all([actual1, actual2, actual3]).then((values) => {
+        var resolved = false;
+        var everything = Promise.all([actual1, actual2, actual3])
+        var shortcut = null;
+        var timeout = new Promise((accept, reject) => {
+            shortcut = accept;
+            setTimeout(function() {
+                if (resolved) accept();
+                else reject("Timeout");
+            }, 2000);
+        })
+        everything.then(() => {
+            resolved = true;
+            shortcut && shortcut();
+        })
+
+        return Promise.all([everything, timeout]).then((junk) => {
+          const values = junk[0];
           assert.isDeepEqual(expected, values[0]);
           assert.isDeepEqual(expected, values[1]);
           assert.isDeepEqual(expected, values[2]);
