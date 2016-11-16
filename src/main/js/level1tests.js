@@ -29,6 +29,7 @@ var level1tests = {
         var expected = [2, 6, 12, 20, 30];
         var actual = code.productAll([1, 2, 3, 4, 5], [2, 3, 4, 5, 6]);
         this.assertEqualArrays(expected, actual);
+        this.assertEqualArrays([2,6,12], code.productAll([1,2,3,4,5], [2,3,4]));
     },
     sumAllTest: function () {
         var actual = code.sumAll([1, 9, 2, 8, 3, 7, 4, 6, 5, 5, 50]);
@@ -55,7 +56,7 @@ var level1tests = {
             ],
             actual
         );
-        assert.isDeepEqual(original, theirs);
+        assert.isDeepEqual(original, theirs, "Arguments have been modified.");
     },
     getSortedDataTest: function() {
         var original = testData.dataToSort;
@@ -86,7 +87,7 @@ var level1tests = {
             ],
             actual
         );
-        assert.isDeepEqual(original, theirs);
+        assert.isDeepEqual(original, theirs, "Arguments have been modified.");
     },
     getLeastFutureOrMostRecentTest: function() {
         var original1 = testData.leastFutureOrMostRecentData1;
@@ -123,9 +124,9 @@ var level1tests = {
             actual3
         );
 
-        assert.isDeepEqual(original1, theirs1);
-        assert.isDeepEqual(original2, theirs2);
-        assert.isDeepEqual(original3, theirs3);
+        assert.isDeepEqual(original1, theirs1, "Arguments have been modified.");
+        assert.isDeepEqual(original2, theirs2, "Arguments have been modified.");
+        assert.isDeepEqual(original3, theirs3, "Arguments have been modified.");
     },
     getCombinedEventDataTest: function () {
         var expected = [
