@@ -1,4 +1,4 @@
-var _ = require('./lib/lodash.core.min');
+var _ = require('./lib/lodash');
 var assert = {
     areEqual: function(expected, actual, failText) {
         if (expected !== actual)

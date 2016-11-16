@@ -4,8 +4,14 @@ function Program() {
 
     function test(t, name) {
         try {
-            t();
-            console.log("PASS:" + name);
+            const ret = t();
+            if (ret && ret.then) {
+                return ret
+                    .then(() => console.log("PASS:" + name))
+                    .catch((ex) => console.log("FAIL:" + name + ": " + (ex.message || ex)))
+            } else {
+                console.log("PASS:" + name);
+            }
         } catch (ex) {
             console.log("FAIL:" + name + ": " + (ex.message || ex));
         }
@@ -13,19 +19,25 @@ function Program() {
 
     function run(tests) {
         var names = Object.getOwnPropertyNames(tests);
-        names.forEach(function (name, i) {
-            if (/Test$/.test(name)) {
-                test(tests[name].bind(tests), name);
-            }
-        });
+        return Promise.all(
+                names.map(function (name, i) {
+                if (/Test$/.test(name)) {
+                    return ret = test(tests[name].bind(tests), name);
+                }
+            }).filter(x => x && x.then)
+        );
+
     }
 
     function main() {
         console.log("\nJavaScript Tests:");
 
-        run(level1tests);
+        run(level1tests).then(x => {
+            console.log("Done! ");
+            console.log("Done!");
+        });
 
-        console.log("Done!");
+        //console.log("Done!");
     }
     main();
 }
