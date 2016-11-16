@@ -23,7 +23,7 @@ var level1tests = {
         for (var i = 0; i < expected.length; i++) {
             assert.areEqual(expected[i], actual[i]);
         }
-        assert.areEqual(expected.length, actual.length);
+        assert.areEqual(expected.length, actual.length, `Expected array length ${expected.length}, got length ${actual.length}`);
     },
     productAllTest: function () {
         var expected = [2, 6, 12, 20, 30];
